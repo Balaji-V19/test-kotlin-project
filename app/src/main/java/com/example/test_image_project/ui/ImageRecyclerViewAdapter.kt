@@ -34,7 +34,7 @@ class ImageRecyclerViewAdapter(private val items: List<ImageModel>,private val c
 
         holder.imageNameText.text=item.name
         Glide.with(context)
-            .load(item.imageUrl)
+            .load(item.imageURL)
             .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
             .into(holder.imageView)
         holder.editButton.setOnClickListener {

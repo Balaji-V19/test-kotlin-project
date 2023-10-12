@@ -48,6 +48,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation androidLibs.coroutines
+    implementation androidLibs.lifecycleViewModel
     implementation androidLibs.retrofit
     implementation androidLibs.retrofitConverter
     implementation androidLibs.retrofitRxAdapter
