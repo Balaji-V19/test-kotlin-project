@@ -14,22 +14,12 @@ interface ApiService {
     @GET("images")
     suspend fun getImages(): Response<List<ApiImageModel>>
 
-    @PUT("edit/{id}")
-    suspend fun editImage(@Path("id") id: String, @Body request: CreateOrEditImageRequest): Response<ImageModelResponse>
+    @PUT("images/{id}")
+    suspend fun editImage(@Path("id") id: String, @Body params: Map<String, @JvmSuppressWildcards Any>): Response<ApiImageModel>
 
     @POST("images")
     suspend fun addImage(@Body params: Map<String, @JvmSuppressWildcards Any>): Response<ApiImageModel>
 
-    @DELETE("delete/{id}")
-    suspend fun deleteImage(@Path("id") id: String): Response<ImageModelResponse>
-
-//    companion object {
-//        fun create(): ApiService {
-//            val retrofit = Retrofit.Builder()
-//                .baseUrl("https://6526b87d917d673fd76ce2e3.mockapi.io/api/v1/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build()
-//            return retrofit.create(ApiService::class.java)
-//        }
-//    }
+    @DELETE("images/{id}")
+    suspend fun deleteImage(@Path("id") id: String): Response<ApiImageModel>
 }

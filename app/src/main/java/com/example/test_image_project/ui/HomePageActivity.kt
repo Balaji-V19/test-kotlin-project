@@ -37,7 +37,7 @@ class HomePageActivity : AppCompatActivity() {
         }
 
         addImageUrlButton.setOnClickListener {
-            val mainIntent = Intent(this@HomePageActivity, AddImageActivity::class.java)
+            val mainIntent = Intent(this@HomePageActivity, AddOrEditImageActivity::class.java)
             startActivity(mainIntent)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
@@ -45,7 +45,6 @@ class HomePageActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        println("skjdkjfgkjfgdkjfgkdj")
         viewModel.fetchImages()
     }
 }

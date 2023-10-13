@@ -45,4 +45,26 @@ class NetworkService(
         }
     }
 
+    suspend fun editNewImage(imageUrl: String, name: String,id: String): Either<ApiImageModel> {
+        return try {
+            val params = hashMapOf<String, Any>(
+                "imageURL" to imageUrl,
+                "name" to name,
+            )
+
+            val response = apiService.editImage(id,params)
+            val body = response.body()
+
+            if (!response.isSuccessful
+                || body == null
+            ) {
+                return Either.failure(Throwable("Something went wrong"))
+            }
+
+            Either.success(body)
+        } catch (error: Throwable) {
+            Either.failure(error)
+        }
+    }
+
 }

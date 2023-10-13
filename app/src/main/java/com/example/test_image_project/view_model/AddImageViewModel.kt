@@ -37,5 +37,21 @@ class AddImageViewModel(
         }
     }
 
+    fun editImageAndName(imageUrl: String, name: String,id: String) {
+        viewModelScope.launch  {
+            _isLoading.set(true)
+            imageResponseUseCase.editNewImage(imageUrl, name,id)
+                .onSuccess {
+                    _isLoading.set(false)
+                    _imageResponse.postValue(it)
+                }
+                .onFailure {
+                    _isLoading.set(false)
+                    println("error from here $it")
+                    showToastMessage.value = it.message
+                }
+        }
+    }
+
 
 }

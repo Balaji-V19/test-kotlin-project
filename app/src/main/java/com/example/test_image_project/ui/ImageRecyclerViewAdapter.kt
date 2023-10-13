@@ -1,6 +1,7 @@
 package com.example.test_image_project.ui
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,11 @@ class ImageRecyclerViewAdapter(private val items: List<ImageModelResponse>,
             .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
             .into(holder.imageView)
         holder.editButton.setOnClickListener {
-            //TODO: need to handle edit api
+            val mainIntent = Intent(context, AddOrEditImageActivity::class.java)
+            mainIntent.putExtra("imageUrl",item.imageUrl)
+            mainIntent.putExtra("name", item.name)
+            mainIntent.putExtra("id", item.id)
+            context.startActivity(mainIntent)
         }
         holder.deleteButton.setOnClickListener {
             //TODO: need to handle delete api

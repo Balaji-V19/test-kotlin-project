@@ -16,7 +16,6 @@ class ImageResponseUseCase(
     }
 
     suspend fun addNewImage(request: CreateOrEditImageRequest): Either<ImageModelResponse> {
-        Log.d("Not a valid", "print all: ${request.imageURL} and ${request.name} and ${request}")
         if (request.imageURL.isNullOrBlank()) {
             return Either.failure(Throwable("ImageUrl is empty"))
         }
@@ -27,6 +26,19 @@ class ImageResponseUseCase(
             return Either.failure(Throwable("ImageUrl is not a valid Url"))
         }
         return imageRepository.addNewImage(request)
+    }
+
+    suspend fun editNewImage(imageUrl: String, name: String, id: String): Either<ImageModelResponse> {
+        if (imageUrl.isBlank()) {
+            return Either.failure(Throwable("ImageUrl is empty"))
+        }
+        if (name.isBlank()) {
+            return Either.failure(Throwable("Name is empty"))
+        }
+        if (!isLink(imageUrl)) {
+            return Either.failure(Throwable("ImageUrl is not a valid Url"))
+        }
+        return imageRepository.editNewImage(imageUrl,name,id)
     }
 
     val isLink: (String) -> Boolean = { input ->
