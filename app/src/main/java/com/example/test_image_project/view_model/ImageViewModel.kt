@@ -1,34 +1,39 @@
 package com.example.test_image_project.view_model
 
-import android.util.Log
+import android.app.Application
+import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.test_image_project.data.ApiService
-import com.example.test_image_project.model.ImageModel
-import kotlinx.coroutines.Dispatchers
+import com.example.test_image_project.data.usecase.ImageResponseUseCase
+import com.example.test_image_project.model.ImageModelResponse
+import com.example.test_image_project.network.onFailure
+import com.example.test_image_project.network.onSuccess
 import kotlinx.coroutines.launch
 
-class ImageViewModel : ViewModel() {
-    private val apiService = ApiService.create()
+class ImageViewModel(
+    private val imageResponseUseCase: ImageResponseUseCase
+) : ViewModel() {
 
-    private val _imageList = MutableLiveData<List<ImageModel>>()
-    val imageList: LiveData<List<ImageModel>> = _imageList
+    private val _isLoading = ObservableBoolean()
+    private val _imageList = MutableLiveData<List<ImageModelResponse>>()
+    val imageList: LiveData<List<ImageModelResponse>> = _imageList
+    val isLoading: ObservableBoolean = _isLoading
 
     fun fetchImages() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = apiService.getImages()
-                if (response.isSuccessful) {
-                    _imageList.postValue(response.body())
-                    println(response.body())
-                } else {
-                    Log.d("Image fetching error", "fetchImages: ${response}")
+        viewModelScope.launch  {
+            _isLoading.set(true)
+            imageResponseUseCase.getImageDetails()
+                .onSuccess {
+                    _isLoading.set(false)
+                    _imageList.postValue(it)
                 }
-            } catch (e: Exception) {
-                Log.d("Image fetching error", "fetchImages: ${e.message}")
-            }
+                .onFailure {
+                    _isLoading.set(false)
+                    println("error from here $it")
+                }
         }
     }
 }

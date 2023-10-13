@@ -50,6 +50,7 @@ dependencies {
     implementation androidLibs.coroutines
     implementation androidLibs.lifecycleViewModel
     implementation androidLibs.retrofit
+    implementation androidLibs.koinViewModel
     implementation androidLibs.retrofitConverter
     implementation androidLibs.retrofitRxAdapter
     implementation androidLibs.glide

@@ -7,6 +7,7 @@ ext {
     ]
 
     androidLibsVersion = [
+            koinVersion                 : "2.1.6",
             retrofitVersion             : "2.9.0",
             coroutinesVersion           : "1.4.0",
             lifecycleViewModelVersion   : "2.5.1",
@@ -29,6 +30,7 @@ ext {
             retrofitConverter       : "com.squareup.retrofit2:converter-gson:${androidLibsVersion.retrofitVersion}",
             retrofitRxAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${androidLibsVersion.retrofitVersion}",
             lifecycleViewModel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${androidLibsVersion.lifecycleViewModelVersion}",
+            koinViewModel           : "io.insert-koin:koin-androidx-viewmodel:${androidLibsVersion.koinVersion}",
 
 
             glide                   : "com.github.bumptech.glide:glide:${androidLibsVersion.glideVersion}",

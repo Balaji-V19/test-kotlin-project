@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.test_image_project.R
-import com.example.test_image_project.model.ImageModel
+import com.example.test_image_project.model.ImageModelResponse
 
 
-class ImageRecyclerViewAdapter(private val items: List<ImageModel>,private val context: Context) : RecyclerView.Adapter<ImageRecyclerViewAdapter.ViewHolder>() {
+class ImageRecyclerViewAdapter(private val items: List<ImageModelResponse>,
+                               private val context: Context) :
+    RecyclerView.Adapter<ImageRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -34,7 +36,7 @@ class ImageRecyclerViewAdapter(private val items: List<ImageModel>,private val c
 
         holder.imageNameText.text=item.name
         Glide.with(context)
-            .load(item.imageURL)
+            .load(item.imageUrl)
             .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
             .into(holder.imageView)
         holder.editButton.setOnClickListener {
