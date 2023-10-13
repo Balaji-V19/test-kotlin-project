@@ -33,7 +33,7 @@ class HomePageActivity : AppCompatActivity() {
         viewModel.imageList
             .observe(this) { data ->
                 items = data
-                recyclerView.adapter = ImageRecyclerViewAdapter(context = this, items = items)
+                recyclerView.adapter = ImageRecyclerViewAdapter(context = this, items = items, viewModel = viewModel)
         }
 
         addImageUrlButton.setOnClickListener {

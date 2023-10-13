@@ -6,4 +6,6 @@
     <string name="add_image_url">Add Image Url</string>
     <string name="please_enter_name">Please enter name</string>
     <string name="please_enter_imageurl">Please enter imageUrl</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

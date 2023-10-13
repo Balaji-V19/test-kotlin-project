@@ -1,5 +1,6 @@
 package com.example.test_image_project.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,15 +9,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.test_image_project.R
 import com.example.test_image_project.model.ImageModelResponse
+import com.example.test_image_project.view_model.ImageViewModel
 
 
 class ImageRecyclerViewAdapter(private val items: List<ImageModelResponse>,
-                               private val context: Context) :
+                               private val context: Context,
+                               private val viewModel: ImageViewModel
+) :
     RecyclerView.Adapter<ImageRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,7 +53,25 @@ class ImageRecyclerViewAdapter(private val items: List<ImageModelResponse>,
             context.startActivity(mainIntent)
         }
         holder.deleteButton.setOnClickListener {
-            //TODO: need to handle delete api
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Alert Dialog")
+            builder.setMessage("Do you want to Delete ${item.name}?")
+            builder.setPositiveButton("Yes",null)
+            builder.setNegativeButton("No",null)
+            val dialog = builder.create()
+            dialog.show()
+
+            val mPositiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            val mNegativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+            mNegativeButton.setOnClickListener {
+                dialog.cancel()
+            }
+
+            mPositiveButton.setOnClickListener {
+                viewModel.deleteImage(item.id)
+                dialog.cancel()
+            }
         }
     }
 

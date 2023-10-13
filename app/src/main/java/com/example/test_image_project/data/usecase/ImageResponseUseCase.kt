@@ -15,6 +15,10 @@ class ImageResponseUseCase(
         return imageRepository.getImages()
     }
 
+    suspend fun deleteImageDetails(id: String): Either<ImageModelResponse> {
+        return imageRepository.deleteImage(id)
+    }
+
     suspend fun addNewImage(request: CreateOrEditImageRequest): Either<ImageModelResponse> {
         if (request.imageURL.isNullOrBlank()) {
             return Either.failure(Throwable("ImageUrl is empty"))

@@ -14,6 +14,8 @@ interface ImageRepository {
     suspend fun addNewImage(request: CreateOrEditImageRequest): Either<ImageModelResponse>
 
     suspend fun editNewImage(imageUrl: String, name: String, id: String): Either<ImageModelResponse>
+
+    suspend fun deleteImage(id: String): Either<ImageModelResponse>
 }
 
 class ImageRepositoryImpl(
@@ -42,6 +44,14 @@ class ImageRepositoryImpl(
     override suspend fun editNewImage(imageUrl: String, name: String, id: String): Either<ImageModelResponse> {
         return try {
             networkService.editNewImage(imageUrl,name,id).map { createOrEditResponseMapper.toDomain(it) }
+        } catch (error: Throwable) {
+            Either.failure(error)
+        }
+    }
+
+    override suspend fun deleteImage(id: String): Either<ImageModelResponse> {
+        return try {
+            networkService.deleteImage(id).map { createOrEditResponseMapper.toDomain(it) }
         } catch (error: Throwable) {
             Either.failure(error)
         }

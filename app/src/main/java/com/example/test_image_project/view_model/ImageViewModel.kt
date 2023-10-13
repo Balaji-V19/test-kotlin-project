@@ -36,4 +36,19 @@ class ImageViewModel(
                 }
         }
     }
+
+    fun deleteImage(id: String) {
+        viewModelScope.launch  {
+            _isLoading.set(true)
+            imageResponseUseCase.deleteImageDetails(id)
+                .onSuccess {
+                    _isLoading.set(false)
+                    fetchImages()
+                }
+                .onFailure {
+                    _isLoading.set(false)
+                    println("error from here $it")
+                }
+        }
+    }
 }
