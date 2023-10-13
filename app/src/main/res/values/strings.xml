@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">test_image_project</string>
     <string name="home_page">Home page</string>
+    <string name="please_wait_for_few_seconds">Please wait for few seconds</string>
+    <string name="submit">Submit</string>
+    <string name="add_image_url">Add Image Url</string>
+    <string name="please_enter_name">Please enter name</string>
+    <string name="please_enter_imageurl">Please enter imageUrl</string>
 </resources>

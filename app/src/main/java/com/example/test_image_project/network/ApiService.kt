@@ -1,5 +1,5 @@
 package com.example.test_image_project.network
-import com.example.test_image_project.model.EditImageRequest
+import com.example.test_image_project.model.CreateOrEditImageRequest
 import com.example.test_image_project.model.ImageModelResponse
 import com.example.test_image_project.network.model.ApiImageModel
 import retrofit2.Response
@@ -15,10 +15,10 @@ interface ApiService {
     suspend fun getImages(): Response<List<ApiImageModel>>
 
     @PUT("edit/{id}")
-    suspend fun editImage(@Path("id") id: String, @Body request: EditImageRequest): Response<ImageModelResponse>
+    suspend fun editImage(@Path("id") id: String, @Body request: CreateOrEditImageRequest): Response<ImageModelResponse>
 
     @POST("images")
-    suspend fun addImage(@Body request: EditImageRequest): Response<ImageModelResponse>
+    suspend fun addImage(@Body params: Map<String, @JvmSuppressWildcards Any>): Response<ApiImageModel>
 
     @DELETE("delete/{id}")
     suspend fun deleteImage(@Path("id") id: String): Response<ImageModelResponse>

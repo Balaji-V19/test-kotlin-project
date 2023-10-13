@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.test_image_project.view_model.AddImageViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.AddImageActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addImageText"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:text="@string/add_image_url"
+            android:gravity="center" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/imageUrlEditText"
+            android:layout_marginTop="20dp"
+            style="@style/RoundedCornerEditText"
+            android:layout_below="@+id/addImageText"
+            android:textColorHint="#210C0C70"
+            android:hint="@string/please_enter_imageurl"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/nameEditText"
+            android:layout_marginTop="20dp"
+            style="@style/RoundedCornerEditText"
+            android:hint="@string/please_enter_name"
+            android:textColorHint="#210C0C70"
+            android:layout_below="@+id/imageUrlEditText"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/nameEditText"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameEditText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            android:id="@+id/submitAddImageButton"
+            android:layout_marginEnd="16dp"
+            android:visibility="@{viewModel.isLoading ? View.INVISIBLE : View.VISIBLE}"
+            android:text="@string/submit" />
+
+    </RelativeLayout>
+</layout>

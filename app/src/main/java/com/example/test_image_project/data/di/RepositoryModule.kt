@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    single<ImageRepository> { ImageRepositoryImpl(get(),get()) }
+    single<ImageRepository> { ImageRepositoryImpl(get(),get(),get()) }
 
 }
